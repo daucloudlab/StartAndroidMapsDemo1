@@ -3,12 +3,15 @@ package kz.abcsoft.android.develop.maps;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -34,6 +37,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init(){
+
+        map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+
+            @Override
+            public void onMapClick(LatLng latLng) {
+                Log.d(TAG, "onMapClick: " + latLng.latitude + "," + latLng.longitude);
+            }
+        });
+
+        map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+                Log.d(TAG, "onMapLongClick: " + latLng.latitude + "," + latLng.longitude);
+            }
+        });
+
+        map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+
+            @Override
+            public void onCameraChange(CameraPosition camera) {
+                Log.d(TAG, "onCameraChange: " + camera.target.latitude + "," + camera.target.longitude);
+            }
+        });
 
     }
 
