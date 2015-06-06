@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -65,7 +67,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickTest(View v){
-        map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(new LatLng(-27, 133))
+                .zoom(5)
+                .bearing(45)
+                .tilt(20)
+                .build();
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+        map.animateCamera(cameraUpdate);
     }
 
     @Override
